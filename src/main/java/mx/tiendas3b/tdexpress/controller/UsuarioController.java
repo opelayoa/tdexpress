@@ -11,13 +11,13 @@ import mx.tiendas3b.tdexpress.entities.Usuario;
 import mx.tiendas3b.tdexpress.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping("/tde/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 	
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public List<Usuario> getAll() {
 		return (List<Usuario>) usuarioRepository.findAll();
 	}
