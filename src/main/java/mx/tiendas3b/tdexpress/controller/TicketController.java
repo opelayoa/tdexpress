@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.tiendas3b.tdexpress.entities.Ticket;
+import mx.tiendas3b.tdexpress.entities.TicketInfo;
+import mx.tiendas3b.tdexpress.entities.TicketSummary;
+import mx.tiendas3b.tdexpress.repository.TicketInfoRepository;
 import mx.tiendas3b.tdexpress.repository.TicketRepository;
+import mx.tiendas3b.tdexpress.repository.TicketSummaryRepository;
 
 @RestController
 @RequestMapping("/tickets")
@@ -17,8 +21,22 @@ public class TicketController {
 	@Autowired
 	TicketRepository ticketRepository;
 
-	@GetMapping("")
-	public List<Ticket> getAll() {
-		return (List<Ticket>) ticketRepository.findAll();
+	@Autowired
+	TicketInfoRepository ticketInfoRepository;
+
+	@Autowired
+	TicketSummaryRepository ticketSummaryRepository;
+
+	@GetMapping("/info/{id}")
+	public TicketInfo getAll(@PathVariable("id") Integer ticketId) {
+		TicketInfo ticketInfo = ticketInfoRepository.getTicketInfoById(ticketId);
+		return ticketInfo;
+	}
+
+	@GetMapping("/summary/user/{userId}/type/{typeId}")
+	public List<TicketSummary> getByType(@PathVariable("userId") Integer userId,
+			@PathVariable("typeId") Integer typeId) {
+		List<TicketSummary> list = ticketSummaryRepository.getTicketsSummary(userId, typeId);
+		return list;
 	}
 }
