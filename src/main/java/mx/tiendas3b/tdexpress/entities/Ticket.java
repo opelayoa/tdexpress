@@ -479,4 +479,24 @@ public class Ticket implements java.io.Serializable {
 		this.fechasolucionh = fechasolucionh;
 	}
 
+	@Override
+	public String toString() {
+		return "Ticket [id=" + id + ", observaciones=" + observaciones + ", solucionremota=" + solucionremota
+				+ ", fechaapertura=" + fechaapertura + ", fechaactualizacion=" + fechaactualizacion + ", fechasolucion="
+				+ fechasolucion + ", fechacierre=" + fechacierre + ", solicitanteId=" + solicitanteId + ", lugarId="
+				+ lugarId + ", sintomaId=" + sintomaId + ", diagnosticoId=" + diagnosticoId + ", posibleorigenId="
+				+ posibleorigenId + ", solucionestandardId=" + solucionestandardId + ", estadoId=" + estadoId
+				+ ", tecnicoId=" + tecnicoId + ", capturistaId=" + capturistaId + ", tipo=" + tipo
+				+ ", esperaUsuarioId=" + esperaUsuarioId + ", esperaProveedorId=" + esperaProveedorId + ", impMotivoId="
+				+ impMotivoId + ", impSolucionId=" + impSolucionId + ", archivo=" + archivo + ", leyenda=" + leyenda
+				+ ", diasAbierto=" + diasAbierto + ", categoria=" + categoria + ", statuspId=" + statuspId
+				+ ", vencido=" + vencido + ", interfaz=" + interfaz + ", hijo=" + hijo + ", correo=" + correo
+				+ ", fechaaperturaf=" + fechaaperturaf + ", fechaaperturah=" + fechaaperturah + ", fechaactualizacionf="
+				+ fechaactualizacionf + ", fechaactualizacionh=" + fechaactualizacionh + ", fechacierref="
+				+ fechacierref + ", fechacierreh=" + fechacierreh + ", fechasolucionf=" + fechasolucionf
+				+ ", fechasolucionh=" + fechasolucionh + "]";
+	}
+	
+	
+
 }
