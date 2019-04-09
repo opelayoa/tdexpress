@@ -7,7 +7,8 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQuery(name = "TicketSummary.getTicketsSummary", query = "select id, leyenda\r\n" + 
 		"from ticket \r\n" + 
 		"where ticket.solicitante_id = ?1\r\n" + 
-		"  and ticket.estado_id = ?2", resultClass = TicketSummary.class)
+		"  and ticket.estado_id = ?2\r\n"
+		+ "order by id desc", resultClass = TicketSummary.class)
 @Entity
 public class TicketSummary {
 	@Id

@@ -59,7 +59,7 @@ public class TicketController {
 		System.out.println(ticketInsert);
 		Ticket ticket = new Ticket();
 		ticket.setObservaciones(ticketInsert.getObservaciones());
-		ticket.setSolucionremota((byte) (ticketInsert.isSolucionRemota() ? 0 : 1));
+		ticket.setSolucionremota((byte) (ticketInsert.isSolucionRemota() ? 1 : 0));
 		ticket.setFechaapertura(ticketInsert.getFechaApertura());
 		ticket.setFechaaperturaf(ticketInsert.getFechaApertura());
 		ticket.setFechaaperturah(ticketInsert.getFechaApertura());
