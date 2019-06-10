@@ -1,5 +1,7 @@
 package mx.tiendas3b.tdexpress.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,12 +18,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import mx.tiendas3b.tdexpress.entities.Ticket;
 import mx.tiendas3b.tdexpress.entities.TicketInfo;
 import mx.tiendas3b.tdexpress.entities.TicketInsert;
 import mx.tiendas3b.tdexpress.entities.TicketSummary;
+import mx.tiendas3b.tdexpress.entities.custom.TicketFileResponse;
 import mx.tiendas3b.tdexpress.entities.custom.TicketResponse;
 import mx.tiendas3b.tdexpress.repository.TicketInfoRepository;
 import mx.tiendas3b.tdexpress.repository.TicketRepository;
@@ -52,6 +57,23 @@ public class TicketController {
 		List<TicketSummary> list = ticketSummaryRepository.getTicketsSummary(userId, typeId);
 		return list;
 	}
+	
+	@PostMapping("/files")
+	public ResponseEntity<TicketFileResponse> saveFileTicket(@RequestParam MultipartFile file){
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("ddMMyyyyhhmmssSSS");
+			String fileName = dateFormat.format(new Date());
+			file.transferTo(new File("c:\\Cursos\\" + fileName + ".png"));
+			TicketFileResponse ticketFileResponse = new TicketFileResponse();
+			ticketFileResponse.setFilePath(fileName + ".png");
+			ResponseEntity<TicketFileResponse> response = new ResponseEntity<>(ticketFileResponse, HttpStatus.CREATED);
+			return response;
+		} catch (IOException e) {
+			ResponseEntity<TicketFileResponse> response = new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		
+	}
 
 	@PostMapping("")
 	public ResponseEntity<TicketResponse> saveTicket(@RequestBody TicketInsert ticketInsert) {
@@ -74,6 +96,7 @@ public class TicketController {
 		ticket.setLeyenda(ticketInsert.getLeyenda());
 		ticket.setCategoria(ticketInsert.getCategoria());
 		ticket.setCorreo((byte) (ticketInsert.isCorreoManual() ? 1 : 0));
+		ticket.setArchivo(ticketInsert.getArchivo());
 		try {
 			ticket = this.saveTicket(ticket);
 

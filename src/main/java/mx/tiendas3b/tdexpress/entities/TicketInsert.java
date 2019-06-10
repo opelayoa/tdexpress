@@ -29,6 +29,7 @@ public class TicketInsert {
 	private String tienda;
 	private String departamento;
 	private String usuario;
+	private String archivo;
 
 	public String getObservaciones() {
 		return observaciones;
@@ -204,6 +205,16 @@ public class TicketInsert {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+	
+	
+
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
 	}
 
 	@Override
